@@ -15,10 +15,6 @@ async def on_ready():
     print(f'Bot is ready. Logged in as {bot.user}')
 
 @bot.command()
-async def EzMod(ctx):
-    await ctx.send(f"{ctx.author.mention}, EzMod was discontinued because it was just a reskinned bot thats been used by hundreds of people. But EzBot is a new, made from scratch bot made by @.ez1oo .")
-
-@bot.command()
 async def goodmorning(ctx):
     await ctx.send(f"Good morning, {ctx.author.mention}!")
 
