@@ -185,5 +185,102 @@ async def setstatus_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("❌ Usage: `!setstatus <playing|streaming|listening|watching> <message>`")
 
+@bot.command(name='changenick')
+@commands.has_permissions(manage_nicknames=True)
+async def change_nickname(ctx, member: discord.Member, *, new_nickname: str):
+    try:
+        await member.edit(nick=new_nickname)
+        await ctx.send(f"✅ Changed nickname for {member.mention} to `{new_nickname}`.")
+    except discord.Forbidden:
+        await ctx.send("❌ I don't have permission to change that user's nickname.")
+    except Exception as e:
+        await ctx.send(f"⚠️ An error occurred: {e}")
+
+@bot.command(name='userinfo')
+async def user_info(ctx, member: discord.Member = None):
+    member = member or ctx.author  # Default to the invoker
+
+    roles = [role.mention for role in member.roles if role.name != "@everyone"]
+    role_list = ", ".join(roles) if roles else "No roles"
+
+    embed = discord.Embed(title=f"User Info: {member}", color=0x00ffcc)
+    embed.set_thumbnail(url=member.avatar.url if member.avatar else member.default_avatar.url)
+    embed.add_field(name="🆔 User ID", value=member.id, inline=False)
+    embed.add_field(name="👤 Username", value=str(member), inline=True)
+    embed.add_field(name="🏷️ Nickname", value=member.nick or "None", inline=True)
+    embed.add_field(name="🤖 Bot Account", value="Yes" if member.bot else "No", inline=True)
+    embed.add_field(name="📆 Account Created", value=member.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=False)
+    embed.add_field(name="📅 Joined Server", value=member.joined_at.strftime("%Y-%m-%d %H:%M:%S") if member.joined_at else "N/A", inline=False)
+    embed.add_field(name="📜 Roles", value=role_list, inline=False)
+
+    embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
+
+    await ctx.send(embed=embed)
+
+@bot.command(name='channelinfo')
+async def channel_info(ctx, channel: discord.abc.GuildChannel = None):
+    channel = channel or ctx.channel  # Defaults to the channel the command was used in
+
+    embed = discord.Embed(title=f"Channel Info: #{channel.name}", color=0x3498db)
+    embed.add_field(name="🆔 Channel ID", value=channel.id, inline=False)
+    embed.add_field(name="📂 Category", value=channel.category.name if channel.category else "None", inline=False)
+    embed.add_field(name="🗂 Type", value=channel.type.name.capitalize(), inline=True)
+    embed.add_field(name="🔞 NSFW", value="Yes" if getattr(channel, 'is_nsfw', lambda: False)() else "No", inline=True)
+    embed.add_field(name="📅 Created On", value=channel.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=False)
+
+    if isinstance(channel, discord.TextChannel):
+        embed.add_field(name="✏️ Topic", value=channel.topic or "None", inline=False)
+        embed.add_field(name="👁 Slowmode", value=f"{channel.slowmode_delay} seconds", inline=True)
+
+    if isinstance(channel, discord.VoiceChannel):
+        embed.add_field(name="👥 User Limit", value=channel.user_limit or "Unlimited", inline=True)
+        embed.add_field(name="🔊 Bitrate", value=f"{channel.bitrate} bps", inline=True)
+
+    embed.set_footer(text=f"Requested by {ctx.author}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
+    await ctx.send(embed=embed)
+
+@bot.command(name='clearbot')
+@commands.has_permissions(manage_messages=True)
+async def clear_bot_messages(ctx, limit: int = 100):
+    """
+    Deletes up to `limit` messages from bots in the current channel.
+    Usage: !clearbot [limit]
+    """
+    await ctx.message.delete()  # Deletes the command invocation message
+
+    def is_bot(m):
+        return m.author.bot
+
+    deleted = await ctx.channel.purge(limit=limit, check=is_bot)
+    confirmation = await ctx.send(f"🧹 Deleted {len(deleted)} bot message(s).")
+    await confirmation.delete(delay=5)  # Auto-delete confirmation message after 5 seconds
+
+@bot.command(name='poll')
+async def poll(ctx, question: str, *options):
+    """
+    Create a simple poll with 2–10 options.
+    Usage: !poll "What's your favorite color?" Red Blue Green
+    """
+    if len(options) < 2:
+        await ctx.send("❌ You need at least 2 options to create a poll.")
+        return
+    if len(options) > 10:
+        await ctx.send("❌ You can only have up to 10 options.")
+        return
+
+    emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
+
+    description = ""
+    for i, option in enumerate(options):
+        description += f"{emojis[i]} {option}\n"
+
+    embed = discord.Embed(title="📊 Poll", description=f"**{question}**\n\n{description}", color=0x7289DA)
+    embed.set_footer(text=f"Poll by {ctx.author}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
+
+    poll_message = await ctx.send(embed=embed)
+
+    for i in range(len(options)):
+        await poll_message.add_reaction(emojis[i])
+
 # Start the bot
 bot.run("INSERT TOKEN HERE")
