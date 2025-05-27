@@ -33,4 +33,5 @@ $serverinfo (shows basic info of the server the bot is in) Ex. $serverinfo
 
 ---
 
-Website: <a href="https://neruvy.github.io/" target="_blank">neruvy</a>
+<a href="https://neruvy.github.io/" target="_blank">Website</a>
+<a href="https://discord.com/oauth2/authorize?client_id=1370770209207750719" target="_blank">Invite Neruvy Bot to your Discord Server!</a>
