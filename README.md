@@ -32,6 +32,9 @@ $poll (creates a simple poll) Ex. $poll "Is windows good" NAh YAH (use quotation
 $serverinfo (shows basic info of the server the bot is in) Ex. $serverinfo
 
 ---
+If you would like to fork this bot and add your own features, it would mean a lot if you gave me a little credit.
+
+---
 
 <a href="https://neruvy.github.io/" target="_blank">Website</a>
 
