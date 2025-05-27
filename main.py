@@ -277,6 +277,21 @@ async def poll(ctx, question: str, *options):
     embed = discord.Embed(title="📊 Poll", description=f"**{question}**\n\n{description}", color=0x7289DA)
     embed.set_footer(text=f"Poll by {ctx.author}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
 
+@bot.command(name='serverinfo')
+async def server_info(ctx):
+    guild = ctx.guild
+
+    embed = discord.Embed(title=f"Server Info - {guild.name}", color=discord.Color.blue())
+    embed.set_thumbnail(url=guild.icon.url if guild.icon else discord.Embed.Empty)
+    embed.add_field(name="Server Name", value=guild.name, inline=True)
+    embed.add_field(name="Server ID", value=guild.id, inline=True)
+    embed.add_field(name="Owner", value=guild.owner, inline=True)
+    embed.add_field(name="Member Count", value=guild.member_count, inline=True)
+    embed.add_field(name="Created At", value=guild.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+    embed.add_field(name="Region", value=str(guild.region), inline=True)
+
+    await ctx.send(embed=embed)
+    
     poll_message = await ctx.send(embed=embed)
 
     for i in range(len(options)):
