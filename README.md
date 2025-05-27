@@ -29,6 +29,8 @@ $clearbot (clears recent bot commands) Ex. $clearbot (numbers 1-100)
 
 $poll (creates a simple poll) Ex. $poll "Is windows good" NAh YAH (use quotations if the option(s) have spaces)
 
+$serverinfo (shows basic info of the server the bot is in) Ex. $serverinfo
+
 ---
 
 Website: <a href="https://neruvy.github.io/" target="_blank">neruvy</a>
