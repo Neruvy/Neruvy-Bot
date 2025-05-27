@@ -1,5 +1,5 @@
 # Neruvy Bot v1.2
-Basic open-source discord moderation bot made by neruvy
+Basic open-source discord moderation bot made by <a href="https://github.io/neruvy/" target="_blank">neruvy</a>
 
 Prefix: $
 
