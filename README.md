@@ -31,6 +31,8 @@ $poll (creates a simple poll) Ex. $poll "Is windows good" NAh YAH (use quotation
 
 $serverinfo (shows basic info of the server the bot is in) Ex. $serverinfo
 
+$helpme (sends you to this page to show you the avaliable commands for my discord bot) Ex. $helpme
+
 ---
 If you would like to fork this bot and add your own features, it would mean a lot if you gave me a little credit.
 
