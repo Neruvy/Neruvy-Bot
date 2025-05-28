@@ -41,3 +41,7 @@ If you would like to fork this bot and add your own features, it would mean a lo
 <a href="https://neruvy.github.io/" target="_blank">Website</a>
 
 <a href="https://discord.com/oauth2/authorize?client_id=1370770209207750719" target="_blank">Invite Neruvy Bot to your Discord Server!</a>
+
+<a href="https://neruvy.github.io/privacy-policy/" target="_blank">Privacy Policy</a>
+
+<a href="https://neruvy.github.io/terms-of-service/" target="_blank">Terms Of Service</a>
