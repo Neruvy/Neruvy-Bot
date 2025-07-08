@@ -1,0 +1,14 @@
+{
+  "welcome": {
+    "1391234611131973863": "Welcome {user} to NeruvyMC! You are member #{server.member_count}!"
+  },
+  "leave": {
+    "1391234611131973863": "Goodbye {user}! We'll miss you in NeruvyMC!"
+  },
+  "welcome_channels": {
+    "1391234611131973863": 1391238108523003985
+  },
+  "leave_channels": {
+    "1391234611131973863": 1391238108523003985
+  }
+}
