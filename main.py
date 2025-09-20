@@ -16,7 +16,7 @@ import json
 
 # Load environment variables from .env file
 load_dotenv()
-TOKEN = os.getenv("MTM3MDc3MDIwOTIwNzc1MDcxOQ.GjBArS.JAWHxAi8h628uV8OYoKvQ2f6jobh9u0TM4R0SM")
+TOKEN = os.getenv("ENTER BOT TOKEN HERE")
 
 # Set up bot with new prefix and all intents
 bot = commands.Bot(command_prefix="$", intents=discord.Intents.all())
@@ -1113,4 +1113,5 @@ async def clear_leave_channel(ctx):
         await ctx.send("ℹ️ No leave channel was set for this server.")
 
 # Start the bot
-bot.run("MTM3MDc3MDIwOTIwNzc1MDcxOQ.GjBArS.JAWHxAi8h628uV8OYoKvQ2f6jobh9u0TM4R0SM")
+bot.run("ENTER BOT TOKEN HERE")
+
