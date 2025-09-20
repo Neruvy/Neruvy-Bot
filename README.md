@@ -1,6 +1,6 @@
 # Discord Bot
 
-A feature-rich Discord bot with moderation and utility.
+An open-source, feature-rich Discord bot with moderation and utility.
 
 ## Setup Instructions
 
